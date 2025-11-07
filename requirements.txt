@@ -1,0 +1,17 @@
+# Core dependencies
+pandas>=1.3.0
+numpy>=1.21.0
+matplotlib>=3.4.0
+seaborn>=0.11.0
+wordcloud>=1.8.0
+
+# Optional: For TikTok scraping (choose one)
+# TikTokApi>=5.0.0
+# playwright>=1.30.0
+# requests>=2.26.0
+# beautifulsoup4>=4.10.0
+
+# Jupyter
+jupyter>=1.0.0
+notebook>=6.4.0
+ipykernel>=6.0.0
