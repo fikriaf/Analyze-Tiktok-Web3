@@ -39,7 +39,16 @@ def scrape_with_firefox(input_file):
     
     print(f'Found {len(links)} links\n')
     
+    # Load existing data if file exists
     all_data = []
+    output_file = 'output/data/scraped_data.csv'
+    if os.path.exists(output_file):
+        try:
+            existing_df = pd.read_csv(output_file)
+            all_data = existing_df.to_dict('records')
+            print(f'Loaded {len(all_data)} existing rows from {output_file}\n')
+        except:
+            print(f'Could not load existing file, starting fresh\n')
     
     # Setup Firefox options
     options = Options()
@@ -476,6 +485,13 @@ def scrape_with_firefox(input_file):
                     all_data.append(video_data)
                 
                 print(f'  ✓ Success\n')
+                
+                # SAVE AFTER EACH VIDEO
+                if len(all_data) > 0:
+                    os.makedirs('output/data', exist_ok=True)
+                    temp_df = pd.DataFrame(all_data)
+                    temp_df.to_csv('output/data/scraped_data.csv', index=False)
+                    print(f'  💾 Saved {len(all_data)} rows to output/data/scraped_data.csv\n')
                 
                 # Human-like wait
                 wait_time = 7 + (idx % 6)
