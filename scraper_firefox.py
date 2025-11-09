@@ -282,7 +282,7 @@ def scrape_with_firefox(input_file):
                             while True:
                                 # Smooth scroll: scroll bertahap 500px per step
                                 driver.execute_script("arguments[0].scrollTop = arguments[0].scrollTop + 500", comment_container)
-                                time.sleep(3)  # Beri waktu comment load
+                                time.sleep(1)  # Beri waktu comment load
                                 scroll_count += 1
                                 
                                 # Count current comments
@@ -300,7 +300,7 @@ def scrape_with_firefox(input_file):
                                 prev_comment_count = current_comment_count
                                 
                                 # Stop conditions - lebih toleran
-                                if no_change_count >= 10:  # Dari 5 ke 10 scroll
+                                if no_change_count >= 30:  # Dari 5 ke 10 scroll
                                     print(f'\n    ✓ Reached bottom (no new comments after 10 scrolls)')
                                     break
                                 
