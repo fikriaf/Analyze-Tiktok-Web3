@@ -1,282 +1,583 @@
-# Analisis Sentimen TikTok: Persepsi Publik terhadap Isu Sosial Web3
+<div align="center">
 
-Implementasi lengkap metodologi penelitian untuk menganalisis persepsi pengguna TikTok terhadap isu sosial di era Web3 menggunakan sentiment analysis dan visualisasi wordcloud.
+# 📊 TikTok Sentiment Analysis
+### Research Workflow & Documentation
 
-## 📋 Deskripsi Proyek
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge&logo=python&logoColor=white)](https://matplotlib.org/)
+[![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://seaborn.pydata.org/)
 
-Proyek ini mengimplementasikan analisis sentimen berbasis rule-based (lexicon-based) untuk memahami persepsi publik Indonesia terhadap isu-isu Web3 seperti AI ethics, blockchain, cryptocurrency, NFT, metaverse, sustainability, dan privacy di platform TikTok.
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-success.svg?style=for-the-badge)](https://github.com)
+[![Research](https://img.shields.io/badge/Research-Academic-orange.svg?style=for-the-badge)](https://github.com)
 
-## 🎯 Tujuan
+**Indonesian Public Perception of Web3 Social Issues on TikTok**
 
-1. Mengumpulkan data komentar dan caption dari TikTok terkait isu sosial Web3
-2. Melakukan analisis sentimen menggunakan metode rule-based
-3. Mengidentifikasi tren topik dan kata dominan
-4. Membuat visualisasi wordcloud untuk berbagai kategori
-5. Menganalisis kesadaran masyarakat terhadap Web3
+[📖 Documentation](#-diagram-overview) • [🚀 Quick Start](#-how-to-view-diagrams) • [📊 Outputs](#-output-file-structure) • [🎨 Visualizations](#6-phase-5-visualization)
 
-## 📊 Metodologi
+---
 
-### Tahapan Penelitian:
+</div>
 
-1. **Pengumpulan Data (Metode Dua Tahap)**
-   
-   **Tahap 1A: Scraping Link Video** (`scraper_link_video_tt.py`)
-   - Scraping link video TikTok berdasarkan hashtag/keyword
-   - Output: File `tiktok_links.txt`
-   
-   **Tahap 1B: Scraping Detail & Komentar** (`scraper_firefox.py`)
-   - Input: File `tiktok_links.txt`
-   - Menggunakan Selenium + Firefox untuk browser automation
-   - User control: Pilih mode comment per video (normal/side)
-   - Smart scrolling: Deteksi total comment dan scroll sampai mendekati target
-   - Auto-save: Data tersimpan setiap video selesai
-   - Extract: Caption, likes, hashtags, dan semua comment (termasuk replies)
-   
-   **Target Hashtag**: #AIethics, #blockchain, #sustainability, #web3, #digitalfreedom, #cryptocurrency, #NFT, #metaverse, #privacy
+## 🌟 Overview
 
-2. **Pra-Pemrosesan Data**
-   - Case folding
-   - Tokenisasi
-   - Stopword removal
-   - Normalisasi slang TikTok
-   - Filtering (emoji, URL, mention, hashtag)
+This folder contains **Mermaid diagrams** visualizing the complete research workflow for TikTok sentiment analysis, from data collection to critical insights.
 
-3. **Analisis Sentimen (Rule-based)**
-   - Lexicon-based sentiment analysis
-   - Kamus kata positif dan negatif dengan bobot
-   - Scoring: Σ(positif × bobot) - Σ(negatif × bobot)
-   - Klasifikasi: Positif / Netral / Negatif
+## 🗂️ Diagram Overview
 
-4. **Analisis Trending Topic**
-   - Frequency analysis
-   - TF-IDF manual calculation
-   - Identifikasi kata kunci dominan
+<table>
+<tr>
+<td width="50%">
 
-5. **Visualisasi Wordcloud**
-   - Wordcloud keseluruhan
-   - Wordcloud per sentimen (positif, netral, negatif)
-   - Wordcloud per topik
+### 📋 Research Pipeline
 
-6. **Analisis Kritis**
-   - Kesadaran Web3
-   - Polarisasi opini
-   - Sentimen per topik
-   - Tren temporal
-
-## 🚀 Cara Menggunakan
-
-### Prerequisites
-
-```bash
-pip install -r requirements.txt
+```mermaid
+graph LR
+    A[Data Collection] --> B[Preprocessing]
+    B --> C[Sentiment Analysis]
+    C --> D[Topic Analysis]
+    D --> E[Visualization]
+    E --> F[Critical Analysis]
+    
+    style A fill:#3498db,stroke:#2980b9,color:#fff
+    style B fill:#f39c12,stroke:#e67e22,color:#fff
+    style C fill:#e91e63,stroke:#c2185b,color:#fff
+    style D fill:#4caf50,stroke:#388e3c,color:#fff
+    style E fill:#9c27b0,stroke:#7b1fa2,color:#fff
+    style F fill:#f44336,stroke:#d32f2f,color:#fff
 ```
 
-Atau install manual:
-```bash
-pip install pandas numpy matplotlib seaborn wordcloud selenium webdriver-manager
+</td>
+<td width="50%">
+
+### 📊 Key Metrics
+
+| Metric | Value |
+|--------|-------|
+| 📝 **Total Comments** | 10,000+ |
+| 🎥 **Unique Videos** | 500+ |
+| 🏷️ **Topics** | 6 categories |
+| 😊 **Sentiment Classes** | 3 types |
+| 📖 **Lexicon Words** | 500+ |
+| 🗣️ **Slang Mappings** | 2,000+ |
+
+</td>
+</tr>
+</table>
+
+---
+
+### 1️⃣ Full Research Workflow
+**File**: [`workflow_full.mmd`](workflow_full.mmd)
+
+![Workflow](https://img.shields.io/badge/Diagram-Complete_Pipeline-blue?style=flat-square)
+![Phases](https://img.shields.io/badge/Phases-6-green?style=flat-square)
+
+Complete overview of all research phases from start to finish.
+
+<details>
+<summary><b>📌 View Phases</b></summary>
+
+- ✅ **Phase 1**: Data Collection
+- ✅ **Phase 2**: Data Preprocessing  
+- ✅ **Phase 3**: Sentiment Analysis
+- ✅ **Phase 4**: Topic Analysis
+- ✅ **Phase 5**: Visualization
+- ✅ **Phase 6**: Critical Analysis
+
+</details>
+
+---
+
+### 2️⃣ Phase 1: Data Collection
+**File**: [`phase1_data_collection.mmd`](phase1_data_collection.mmd)
+
+![Stage](https://img.shields.io/badge/Stage-Two--Stage_Scraping-3498db?style=flat-square)
+![Tool](https://img.shields.io/badge/Tool-Selenium_+_Firefox-orange?style=flat-square)
+
+<table>
+<tr>
+<td width="50%">
+
+**🔍 Stage 1A: Video Link Scraping**
+```
+Input  → Hashtags/Keywords
+Tool   → scraper_link_video_tt.py
+Output → tiktok_links.txt
 ```
 
-### Scraping Data TikTok (Metode Dua Tahap)
+</td>
+<td width="50%">
 
-**Tahap 1: Scraping Link Video**
-
-```bash
-python scraper_link_video_tt.py
+**💬 Stage 1B: Detail & Comment Scraping**
+```
+Input  → tiktok_links.txt
+Tool   → scraper_firefox.py
+Output → scraped_data.csv
 ```
 
-- Input hashtag atau keyword yang ingin di-scrape
-- Script akan mengumpulkan link video TikTok
-- Output: `tiktok_links.txt` berisi daftar URL video
+</td>
+</tr>
+</table>
 
-**Tahap 2: Scraping Detail Video & Komentar**
+<details>
+<summary><b>⚡ Key Features</b></summary>
 
-```bash
-python scraper_firefox.py
+- ✅ Auto-detect comment layout (normal/side)
+- ✅ Smart scrolling with auto-stop
+- ✅ Expand all replies automatically
+- ✅ Auto-save per video
+- ✅ Duplicate removal
+
+</details>
+
+---
+
+### 3️⃣ Phase 2: Data Preprocessing
+**File**: [`phase2_preprocessing.mmd`](phase2_preprocessing.mmd)
+
+![Pipeline](https://img.shields.io/badge/Pipeline-5_Steps-f39c12?style=flat-square)
+![Output](https://img.shields.io/badge/Output-Clean_Data-success?style=flat-square)
+
+```mermaid
+graph LR
+    A[Raw Text] --> B[Case Folding]
+    B --> C[Tokenization]
+    C --> D[Stopword Removal]
+    D --> E[Normalization]
+    E --> F[Filtering]
+    F --> G[Clean Text]
+    
+    style A fill:#e74c3c,stroke:#c0392b,color:#fff
+    style G fill:#2ecc71,stroke:#27ae60,color:#fff
 ```
 
-- Script akan membaca file `tiktok_links.txt`
-- Firefox browser akan terbuka otomatis
-- Untuk setiap video:
-  - Video akan dibuka di browser
-  - User diminta input mode comment (0=Normal, 1=Side Comment)
-  - Script akan scroll dan load semua comment
-  - Klik button "Lihat X balasan" untuk expand replies
-  - Extract semua comment text
-  - Auto-save setiap video selesai
-- Output: `output/data/scraped_data.csv`
+<details>
+<summary><b>🔧 Processing Steps</b></summary>
 
-**Fitur Scraper Firefox:**
-- ✅ Auto-detect jumlah total comment
-- ✅ Smart scroll sampai mendekati total comment
-- ✅ Stop otomatis jika 10x scroll tidak ada penambahan comment
-- ✅ Support mode normal dan side comment
-- ✅ Auto-save setiap video (data tidak hilang jika crash)
-- ✅ Resume scraping (load data existing jika file sudah ada)
-- ✅ Extract nested comment text dengan multiple fallback methods
+| Step | Description | Source |
+|------|-------------|--------|
+| 1️⃣ **Case Folding** | Convert to lowercase | - |
+| 2️⃣ **Tokenization** | Split into words | - |
+| 3️⃣ **Stopword Removal** | Remove common words | `sources/stopwords-id.json` |
+| 4️⃣ **Normalization** | Slang → Formal | `sources/slang_indo.csv` |
+| 5️⃣ **Filtering** | Remove emoji, URL, mentions | - |
 
-### Menjalankan Analisis
+**Output**: `preprocessed_data.csv`
 
-1. Buka Jupyter Notebook:
-```bash
-jupyter notebook tiktok_sentiment_analysis.ipynb
+</details>
+
+---
+
+### 4️⃣ Phase 3: Sentiment Analysis
+**File**: [`phase3_sentiment_analysis.mmd`](phase3_sentiment_analysis.mmd)
+
+![Method](https://img.shields.io/badge/Method-Rule--Based_Lexicon-e91e63?style=flat-square)
+![Lexicon](https://img.shields.io/badge/Lexicon-500+_Words-purple?style=flat-square)
+
+<table>
+<tr>
+<td width="60%">
+
+**📊 Sentiment Calculation**
+
+```python
+# Formula
+score = Σ(positive × weight) - Σ(negative × weight)
+
+# Classification
+if score ≥ 1:   → Positive 😊
+if score = 0:   → Neutral 😐
+if score ≤ -1:  → Negative 😞
 ```
 
-2. Jalankan sel secara berurutan dari atas ke bawah
+**Lexicon Size**:
+- ✅ 300+ Positive words
+- ❌ 200+ Negative words
+- 🎯 Context-aware rules
 
-3. Hasil analisis akan tersimpan otomatis di folder `output/`
+</td>
+<td width="40%">
 
-### Struktur Output
+**🎨 Output Examples**
 
-Semua hasil analisis akan disimpan di folder `output/`:
+<img src="../output/graphs/sentiment_distribution.png" width="100%">
+
+*Figure 1: Overall sentiment distribution*
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>📈 More Visualizations</b></summary>
+
+<img src="../output/graphs/sentiment_by_topic.png" width="100%">
+
+*Figure 2: Sentiment distribution per topic*
+
+</details>
+
+---
+
+### 5️⃣ Phase 4: Topic Analysis
+**File**: [`phase4_topic_analysis.mmd`](phase4_topic_analysis.mmd)
+
+![Methods](https://img.shields.io/badge/Methods-4_Techniques-4caf50?style=flat-square)
+![Topics](https://img.shields.io/badge/Topics-6_Categories-blue?style=flat-square)
+
+<table>
+<tr>
+<td width="50%">
+
+**🔍 Analysis Methods**
+
+| Method | Description |
+|--------|-------------|
+| 📊 **Frequency** | Word occurrence counting |
+| 🎯 **TF-IDF** | Term importance scoring |
+| 🏷️ **Categorization** | Hashtag-based grouping |
+| ⏱️ **Temporal** | Trend over time |
+
+**Topic Categories**:
+- 🤖 AI Ethics
+- ⛓️ Blockchain & Crypto
+- 🌱 Sustainability
+- 🎨 NFT & Metaverse
+- 🔒 Privacy & Security
+- 🌐 Web3 General
+
+</td>
+<td width="50%">
+
+**📊 Output Examples**
+
+<img src="../output/graphs/top_words_comparison.png" width="100%">
+
+*Figure 3: Top 20 words comparison*
+
+<img src="../output/graphs/web3_keyword_mentions.png" width="100%">
+
+*Figure 4: Web3 keyword frequency*
+
+</td>
+</tr>
+</table>
+
+---
+
+### 6️⃣ Phase 5: Visualization
+**File**: [`phase5_visualization.mmd`](phase5_visualization.mmd)
+
+![Visualizations](https://img.shields.io/badge/Visualizations-15+_Charts-9c27b0?style=flat-square)
+![Types](https://img.shields.io/badge/Types-Basic_+_Advanced-orange?style=flat-square)
+
+<details>
+<summary><b>📊 Basic Visualizations</b></summary>
+
+- 📊 Bar charts (sentiment distribution, by topic)
+- 📈 Line charts (temporal trends)
+- 🥧 Pie charts (topic proportions)
+
+</details>
+
+<details open>
+<summary><b>🎨 Advanced Visualizations</b></summary>
+
+<table>
+<tr>
+<td width="50%">
+
+**🔥 Heatmap**
+<img src="../output/graphs/advanced_heatmap_sentiment_topic.png" width="100%">
+*Sentiment intensity per topic*
+
+**🎯 Radar Chart**
+<img src="../output/graphs/advanced_radar_sentiment_profile.png" width="100%">
+*Multi-dimensional sentiment profile*
+
+</td>
+<td width="50%">
+
+**🎻 Violin Plot**
+<img src="../output/graphs/advanced_violin_sentiment_distribution.png" width="100%">
+*Sentiment score distribution*
+
+**📰 Infographic**
+<img src="../output/graphs/advanced_infographic_summary.png" width="100%">
+*Complete analysis summary*
+
+</td>
+</tr>
+</table>
+
+</details>
+
+<details>
+<summary><b>☁️ Wordcloud Gallery</b></summary>
+
+<table>
+<tr>
+<td width="33%">
+
+**Overall**
+<img src="../output/wordclouds/wordcloud_overall.png" width="100%">
+
+</td>
+<td width="33%">
+
+**By Sentiment**
+<img src="../output/wordclouds/wordcloud_by_sentiment.png" width="100%">
+
+</td>
+<td width="33%">
+
+**By Topic**
+<img src="../output/wordclouds/wordcloud_by_topic.png" width="100%">
+
+</td>
+</tr>
+</table>
+
+</details>
+
+---
+
+### 7. Phase 6: Critical Analysis
+**File**: `phase6_critical_analysis.mmd`
+
+In-depth analysis and insights extraction.
+
+**Analysis Components**:
+1. **Web3 Awareness** - Keyword frequency and context
+2. **Opinion Polarization** - Sentiment extremity measurement
+3. **Sentiment Triggers** - Event correlation analysis
+4. **Discourse Patterns** - Viral pattern detection
+5. **Bias & Limitations** - Methodology constraints
+
+**Output**: `summary_report.json`
+
+---
+
+### 8. Scraper Firefox Detail
+**File**: `scraper_firefox_detail.mmd`
+
+Detailed Firefox scraper workflow and logic.
+
+**Key Features**:
+- Browser automation with Selenium
+- Anti-detection configuration
+- User-controlled comment mode selection
+- Smart scrolling algorithm
+- Reply expansion automation
+- Incremental auto-save
+
+---
+
+## 🎨 How to View Diagrams
+
+<table>
+<tr>
+<td width="33%">
+
+### 🌐 GitHub
+![Recommended](https://img.shields.io/badge/Recommended-✓-success?style=flat-square)
+
+Upload `.mmd` files to GitHub - auto-renders as diagrams.
+
+</td>
+<td width="33%">
+
+### 🔴 Mermaid Live
+![Online](https://img.shields.io/badge/Online-Editor-blue?style=flat-square)
+
+Visit [mermaid.live](https://mermaid.live/)
+
+Copy-paste `.mmd` content
+
+</td>
+<td width="33%">
+
+### 💻 VS Code
+![Extension](https://img.shields.io/badge/Extension-Required-orange?style=flat-square)
+
+Install: "Markdown Preview Mermaid Support"
+
+Preview: `Ctrl+Shift+V`
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>🐍 Python Integration</b></summary>
+
+**Jupyter Notebook**:
+```python
+from IPython.display import display, Markdown
+
+with open('docs/workflow_full.mmd', 'r', encoding='utf-8') as f:
+    mermaid_code = f.read()
+    
+display(Markdown(f"```mermaid\n{mermaid_code}\n```"))
+```
+
+**Python Script**:
+```python
+import matplotlib.pyplot as plt
+from mermaid import Mermaid
+
+# Render mermaid to image
+mermaid = Mermaid('docs/workflow_full.mmd')
+mermaid.to_png('workflow.png')
+```
+
+</details>
+
+---
+
+## 📝 Mermaid Syntax Reference
+
+All files use Mermaid flowchart syntax:
+
+```mermaid
+flowchart TD
+    Start([Start]) --> Process[Process]
+    Process --> Decision{Decision?}
+    Decision -->|Yes| End([End])
+    Decision -->|No| Process
+```
+
+**Node Types**:
+- `([text])` - Start/End (rounded rectangle)
+- `[text]` - Process (rectangle)
+- `{text}` - Decision (diamond)
+- `[(text)]` - Database (cylinder)
+- `((text))` - Circle
+
+**Arrow Types**:
+- `-->` - Solid arrow
+- `-.->` - Dotted arrow
+- `==>` - Thick arrow
+
+**Color Scheme**:
+- 🔵 Blue: Data collection
+- 🟡 Yellow: Preprocessing
+- 🟣 Pink: Sentiment analysis
+- 🟢 Green: Topic analysis
+- 🟣 Purple: Visualization
+- 🔴 Red: Critical analysis
+- 🟠 Gold: Output files
+
+---
+
+## 📂 Output File Structure
 
 ```
 output/
 ├── data/
-│   ├── raw_data.csv                    # Data mentah hasil scraping
-│   ├── preprocessed_data.csv           # Data setelah preprocessing
-│   ├── sentiment_results.csv           # Hasil analisis sentimen
-│   ├── final_data_with_topics.csv      # Data final dengan kategori topik
-│   ├── word_frequency.csv              # Frekuensi kata
-│   ├── tfidf_scores.csv                # Skor TF-IDF
-│   ├── web3_awareness.csv              # Analisis kesadaran Web3
-│   ├── sentiment_by_topic.csv          # Sentimen per topik
-│   ├── polarization_analysis.csv       # Analisis polarisasi
-│   ├── positive_lexicon.json           # Kamus kata positif
-│   └── negative_lexicon.json           # Kamus kata negatif
+│   ├── scraped_data.csv              # Raw scraped data
+│   ├── preprocessed_data.csv         # Cleaned data
+│   ├── sentiment_results.csv         # Sentiment analysis results
+│   ├── final_data_with_topics.csv    # Complete dataset
+│   ├── word_frequency.csv            # Word frequency table
+│   ├── tfidf_scores.csv              # TF-IDF scores
+│   ├── web3_keyword_mentions.csv     # Keyword tracking
+│   └── summary_report.json           # Key metrics
+│
 ├── graphs/
-│   ├── sentiment_distribution.png      # Distribusi sentimen
-│   ├── top_words_comparison.png        # Perbandingan top words
-│   ├── sentiment_by_topic.png          # Sentimen per topik
-│   └── sentiment_trend.png             # Tren sentimen temporal
-├── wordclouds/
-│   ├── wordcloud_overall.png           # Wordcloud keseluruhan
-│   ├── wordcloud_by_sentiment.png      # Wordcloud per sentimen
-│   └── wordcloud_by_topic.png          # Wordcloud per topik
-└── SUMMARY_REPORT.txt                  # Laporan ringkasan lengkap
+│   ├── sentiment_distribution.png
+│   ├── sentiment_by_topic.png
+│   ├── top_words_comparison.png
+│   ├── web3_keyword_mentions.png
+│   ├── advanced_heatmap_sentiment_topic.png
+│   ├── advanced_radar_sentiment_profile.png
+│   ├── advanced_violin_sentiment_distribution.png
+│   ├── advanced_network_cooccurrence.png
+│   └── advanced_infographic_summary.png
+│
+└── wordclouds/
+    ├── wordcloud_overall.png
+    ├── wordcloud_by_sentiment.png
+    └── wordcloud_by_topic.png
 ```
-
-## 📈 Fitur Utama
-
-### 1. Sentiment Analysis Rule-based
-- Tidak bergantung pada model AI besar
-- Menggunakan kamus sentimen lokal (bahasa Indonesia)
-- Disesuaikan dengan konteks TikTok dan Web3
-
-### 2. Preprocessing Komprehensif
-- Normalisasi slang TikTok (gak → tidak, banget → sangat, dll)
-- Stopword removal bahasa Indonesia
-- Filtering emoji, URL, mention
-
-### 3. Visualisasi Lengkap
-- Bar charts untuk distribusi sentimen
-- Wordcloud dengan berbagai kategori
-- Grafik tren temporal
-- Stacked bar chart sentimen per topik
-
-### 4. Analisis Mendalam
-- Kesadaran Web3 (frekuensi mention istilah kunci)
-- Polarisasi opini per topik
-- TF-IDF untuk identifikasi kata penting
-- Kategorisasi topik otomatis
-
-## 📝 Catatan Implementasi
-
-### Scraping TikTok dengan Firefox
-
-Proyek ini menggunakan **Selenium + Firefox** untuk scraping karena:
-- ✅ Lebih susah dideteksi dibanding Chrome
-- ✅ Tidak perlu API key atau subscription
-- ✅ Full control terhadap proses scraping
-- ✅ Bisa handle berbagai layout TikTok (normal/side comment)
-- ✅ Auto-download geckodriver (tidak perlu install manual)
-
-### Konfigurasi Scraper
-
-**File: `scraper_firefox.py`**
-
-```python
-# Input file
-input_file = 'tiktok_links.txt'
-
-# Output file (auto-save setiap video)
-output_file = 'output/data/scraped_data.csv'
-
-# Scroll settings
-scroll_delay = 3  # detik per scroll (sidebar)
-scroll_delay_main = 4  # detik per scroll (main page)
-max_scroll = 200  # safety limit
-no_change_threshold = 10  # stop jika 10x scroll tidak ada perubahan
-```
-
-### Tips Scraping
-
-1. **Mode Comment**:
-   - Mode 0 (Normal): Comment di bawah video
-   - Mode 1 (Side Comment): Comment di sidebar kanan
-
-2. **Scroll Strategy**:
-   - Sidebar: Smooth scroll 500px per step
-   - Main page: Smooth scroll 800px per step
-   - Auto-detect total comment dan scroll sampai 95% atau mentok
-
-3. **Expand Replies**:
-   - Auto-klik button "Lihat X balasan"
-   - Auto-klik button "Lihat X lainnya"
-   - Support bahasa Indonesia dan Inggris
-
-4. **Data Privacy**:
-   - Username bisa di-enkripsi jika diperlukan
-   - Tidak menyimpan informasi pribadi sensitif
-
-## 📚 Referensi
-
-- Proposal lengkap: `tiktok_sentiment_proposal.md`
-- TikTokApi Documentation: https://github.com/davidteather/TikTok-Api
-- WordCloud Documentation: https://amueller.github.io/word_cloud/
-
-## 🔬 Metodologi Penelitian
-
-Proyek ini mengikuti metodologi penelitian kuantitatif deskriptif dengan pendekatan text mining dan sentiment analysis sesuai dengan proposal penelitian lengkap.
-
-### Keunggulan Metode Rule-based:
-- ✅ Transparan dan dapat dijelaskan
-- ✅ Tidak memerlukan training data besar
-- ✅ Dapat disesuaikan dengan konteks lokal
-- ✅ Independen dari model AI besar
-- ✅ Cocok untuk bahasa Indonesia informal (TikTok)
-
-## 📊 Luaran Penelitian
-
-1. **Dataset Isu Sosial TikTok** - Data terstruktur dengan label sentimen
-2. **Kamus Sentimen TikTok** - Lexicon bahasa Indonesia untuk TikTok
-3. **Grafik Persepsi Publik** - Visualisasi distribusi sentimen
-4. **Wordcloud Isu Sosial** - Representasi visual kata dominan
-5. **Tren Wacana** - Analisis perubahan sentimen temporal
-6. **Peta Kesadaran Web3** - Insight tentang pemahaman masyarakat
-
-## 👥 Kontributor
-
-Proyek ini dibuat sebagai implementasi dari proposal penelitian:
-**"Analisis Persepsi Pengguna terhadap Isu Sosial di TikTok Menggunakan Sentiment Analysis dan Visualisasi Wordcloud di Era Web3"**
-
-## 📄 Lisensi
-
-Data yang dikumpulkan harus mematuhi:
-- Terms of Service TikTok
-- Kebijakan privasi data
-- GDPR dan regulasi Indonesia
-- Anonimisasi data pengguna
-
-## ⚠️ Disclaimer
-
-- Notebook ini adalah template implementasi
-- Scraping TikTok memerlukan API key atau setup khusus
-- Pastikan mematuhi Terms of Service platform
-- Data pengguna harus dianonimkan
-- Hasil analisis untuk tujuan penelitian akademis
 
 ---
 
-**Dibuat sesuai metodologi penelitian dalam proposal**
+## 🔄 Updating Diagrams
 
-**Semua output disimpan otomatis ke folder `output/`**
+To modify workflow diagrams:
+
+1. Edit the corresponding `.mmd` file
+2. Follow Mermaid syntax: https://mermaid.js.org/syntax/flowchart.html
+3. Test in Mermaid Live Editor before committing
+4. Update this README if adding new diagrams
+
+---
+
+## 📚 Additional Resources
+
+**Mermaid Documentation**: https://mermaid.js.org/
+
+**Flowchart Syntax**: https://mermaid.js.org/syntax/flowchart.html
+
+**Color Themes**: https://mermaid.js.org/config/theming.html
+
+**Examples Gallery**: https://mermaid.js.org/ecosystem/integrations.html
+
+---
+
+## 📊 Research Metrics
+
+**Dataset Statistics**:
+- Total Comments: ~10,000+
+- Unique Videos: ~500+
+- Topics Covered: 6 categories
+- Sentiment Classes: 3 (Positive, Neutral, Negative)
+- Unique Words: ~5,000+
+
+**Analysis Outputs**:
+- 15+ Visualizations (graphs + wordclouds)
+- 8+ Data files (CSV + JSON)
+- 500+ Sentiment lexicon words
+- 2,000+ Slang mappings
+
+---
+
+<div align="center">
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Issues](https://img.shields.io/badge/Issues-Open-red.svg?style=flat-square)](https://github.com/issues)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+---
+
+### 📚 Project Information
+
+**Project**: TikTok Sentiment Analysis - Indonesian Public Perception of Web3 Social Issues
+
+**Methodology**: Rule-based Sentiment Analysis + Advanced Visualizations
+
+**Language**: Indonesian (Bahasa Indonesia) with informal TikTok slang
+
+**Created**: 2024-2025
+
+---
+
+<sub>Built with ❤️ for academic research | Powered by Python, Pandas, Matplotlib & Seaborn</sub>
+
+[![Made with Python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg?style=flat-square)](https://www.python.org/)
+[![Made with Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg?style=flat-square)](http://commonmark.org)
+[![Powered by Mermaid](https://img.shields.io/badge/Powered%20by-Mermaid-ff69b4.svg?style=flat-square)](https://mermaid.js.org/)
+
+</div>
