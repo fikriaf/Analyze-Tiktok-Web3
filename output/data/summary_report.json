@@ -1,0 +1,23 @@
+{
+  "total_data": 11162,
+  "total_videos": 40,
+  "sentiment_distribution": {
+    "netral": 8021,
+    "positif": 2039,
+    "negatif": 1102
+  },
+  "top_5_words": [
+    "bang",
+    "nya",
+    "beli",
+    "saja",
+    "yang"
+  ],
+  "top_5_topics": {
+    "Web3 General": 9269,
+    "Blockchain & Crypto": 1368,
+    "NFT & Metaverse": 525
+  },
+  "polarization_score": 28.14,
+  "neutral_percentage": 71.86
+}
