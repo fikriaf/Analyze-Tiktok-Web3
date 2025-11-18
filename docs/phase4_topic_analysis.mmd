@@ -1,0 +1,44 @@
+flowchart TD
+    Start([Start Topic Analysis]) --> Load[Load: sentiment_results.csv]
+    
+    Load --> Method1[Method 1: Frequency Analysis]
+    Load --> Method2[Method 2: TF-IDF Analysis]
+    
+    Method1 --> Freq1[Count Word Frequency]
+    Freq1 --> Freq2[Rank Top Words]
+    Freq2 --> Freq3[Identify Keywords per Topic]
+    Freq3 --> Output1[Output: word_frequency.csv]
+    
+    Method2 --> TFIDF1[Calculate Term Frequency<br/>TF = count in doc / total words]
+    TFIDF1 --> TFIDF2[Calculate Inverse Doc Frequency<br/>IDF = log total docs / docs with term]
+    TFIDF2 --> TFIDF3[Calculate TF-IDF Score<br/>TF-IDF = TF × IDF]
+    TFIDF3 --> Output2[Output: tfidf_scores.csv]
+    
+    Output1 --> Categorize
+    Output2 --> Categorize
+    
+    Categorize[Categorize Topics] --> Cat1[AI Ethics]
+    Categorize --> Cat2[Blockchain & Crypto]
+    Categorize --> Cat3[Sustainability]
+    Categorize --> Cat4[Digital Freedom]
+    Categorize --> Cat5[Privacy]
+    Categorize --> Cat6[NFT & Metaverse]
+    
+    Cat1 --> Merge
+    Cat2 --> Merge
+    Cat3 --> Merge
+    Cat4 --> Merge
+    Cat5 --> Merge
+    Cat6 --> Merge
+    
+    Merge[Merge Topic Labels] --> Temporal[Temporal Analysis<br/>- Weekly trends<br/>- Monthly patterns<br/>- Emerging topics]
+    
+    Temporal --> Output3[Output: final_data_with_topics.csv]
+    Output3 --> End([Topic Analysis Complete])
+    
+    style Method1 fill:#27ae60,color:#fff
+    style Method2 fill:#27ae60,color:#fff
+    style Output1 fill:#f0ad4e,color:#000
+    style Output2 fill:#f0ad4e,color:#000
+    style Output3 fill:#f0ad4e,color:#000
+

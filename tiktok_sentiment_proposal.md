@@ -111,15 +111,40 @@ Menganalisis persepsi dan sentimen publik Indonesia terhadap isu sosial era Web3
 
 #### TAHAP 1: Pengumpulan Data
 
-**Sumber Data**: TikTok (melalui TikTok Scraper API / scraping HTML)
+**Metode Scraping Dua Tahap**:
+
+**Tahap 1A: Scraping Link Video**
+- **Tool**: `scraper_link_video_tt.py`
+- **Fungsi**: Mengumpulkan link video TikTok berdasarkan hashtag atau keyword
+- **Output**: File `tiktok_links.txt` berisi daftar URL video
+- **Proses**:
+  - Input hashtag atau keyword target
+  - Scraping halaman pencarian TikTok
+  - Ekstraksi URL video yang relevan
+  - Simpan ke file text untuk processing selanjutnya
+
+**Tahap 1B: Scraping Detail Video & Komentar**
+- **Tool**: `scraper_firefox.py` (Selenium + Firefox)
+- **Input**: File `tiktok_links.txt` dari Tahap 1A
+- **Fungsi**: Mengunjungi setiap link dan mengekstrak data lengkap
+- **Proses**:
+  - Load link dari file
+  - Buka video di browser Firefox
+  - User menentukan mode comment (0=Normal, 1=Side Comment)
+  - Ekstrak caption, likes, hashtags
+  - Scroll dan load semua comment
+  - Klik button "Lihat X balasan" untuk expand replies
+  - Ekstrak semua comment text
+  - Auto-save setiap video selesai di-scrape
 
 **Data yang Diambil**:
+- Video ID
+- Username (dienkripsi untuk privasi)
 - Caption video
-- Komentar pengguna
+- Komentar pengguna (level 1 dan level 2/replies)
 - Jumlah likes
 - Hashtag yang digunakan
-- Tanggal unggah
-- Username (dienkripsi untuk privasi)
+- Tanggal scraping
 
 **Filter Hashtag** (Indonesia & Global):
 - #AIethics, #AIIndonesia, #KecerdasanBuatan
@@ -131,16 +156,20 @@ Menganalisis persepsi dan sentimen publik Indonesia terhadap isu sosial era Web3
 - #NFT, #NFTIndonesia
 - #metaverse, #metaverseIndonesia
 - #privacy, #privasi, #dataPrivacy
-- #NFT
-- #metaverse
-- #privacy
 
-**Format Penyimpanan**: CSV / JSON
+**Format Penyimpanan**: CSV
 
 Struktur data CSV:
 ```
-video_id | username | caption | comment | likes | hashtags | date | processed_text
+video_id | username | caption | comment | likes | hashtags | date
 ```
+
+**Keunggulan Metode Dua Tahap**:
+- Lebih efisien: scraping link dulu, baru detail
+- Fleksibel: bisa pause dan resume scraping
+- Auto-save: data tidak hilang jika browser crash
+- Manual control: user bisa pilih mode comment per video
+- Robust: handle berbagai layout TikTok (normal/side comment)
 
 #### TAHAP 2: Pra-Pemrosesan Data
 
@@ -616,7 +645,7 @@ Dataset hasil scraping berisi komentar, caption, hashtag, dan metainformasi dari
 - topic_category: Kategori topik (AI/blockchain/sustainability/dll)
 ```
 
-**Ukuran**: 10,000 - 50,000 baris data
+**Ukuran**: 12,000 baris data
 
 **Nilai Analitis**:
 - Dasar empiris untuk penelitian sosial digital

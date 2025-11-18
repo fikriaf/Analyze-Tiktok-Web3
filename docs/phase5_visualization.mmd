@@ -1,0 +1,57 @@
+flowchart TD
+    Start([Start Visualization]) --> Load[Load: final_data_with_topics.csv]
+    
+    Load --> Graphs[Create Graphs]
+    Load --> Wordclouds[Create Wordclouds]
+    
+    Graphs --> Graph1[Bar Chart:<br/>Sentiment Distribution<br/>Positif/Netral/Negatif]
+    Graphs --> Graph2[Stacked Bar Chart:<br/>Sentiment by Topic]
+    Graphs --> Graph3[Line Chart:<br/>Temporal Trends]
+    Graphs --> Graph4[Pie Chart:<br/>Topic Proportions]
+    
+    Graph1 --> SaveGraphs[Save to: output/graphs/]
+    Graph2 --> SaveGraphs
+    Graph3 --> SaveGraphs
+    Graph4 --> SaveGraphs
+    
+    Wordclouds --> WC1[Overall Wordcloud<br/>All dominant words]
+    Wordclouds --> WC2[Sentiment Wordclouds]
+    Wordclouds --> WC3[Topic Wordclouds]
+    
+    WC2 --> WC2a[Positive Wordcloud<br/>Green colormap]
+    WC2 --> WC2b[Negative Wordcloud<br/>Red colormap]
+    WC2 --> WC2c[Neutral Wordcloud<br/>Grey colormap]
+    
+    WC3 --> WC3a[AI Ethics Wordcloud]
+    WC3 --> WC3b[Blockchain Wordcloud]
+    WC3 --> WC3c[Sustainability Wordcloud]
+    WC3 --> WC3d[Digital Freedom Wordcloud]
+    WC3 --> WC3e[Privacy Wordcloud]
+    WC3 --> WC3f[NFT & Metaverse Wordcloud]
+    
+    WC1 --> SaveWC[Save to: output/wordclouds/]
+    WC2a --> SaveWC
+    WC2b --> SaveWC
+    WC2c --> SaveWC
+    WC3a --> SaveWC
+    WC3b --> SaveWC
+    WC3c --> SaveWC
+    WC3d --> SaveWC
+    WC3e --> SaveWC
+    WC3f --> SaveWC
+    
+    SaveGraphs --> Config[Configuration:<br/>- Resolution: 1600x800<br/>- DPI: 300<br/>- Format: PNG<br/>- Max words: 100-150]
+    SaveWC --> Config
+    
+    Config --> End([Visualization Complete])
+    
+    style Graph1 fill:#8e44ad,color:#fff
+    style Graph2 fill:#8e44ad,color:#fff
+    style Graph3 fill:#8e44ad,color:#fff
+    style Graph4 fill:#8e44ad,color:#fff
+    style WC2a fill:#5cb85c,color:#fff
+    style WC2b fill:#d9534f,color:#fff
+    style WC2c fill:#95a5a6,color:#fff
+    style SaveGraphs fill:#f0ad4e,color:#000
+    style SaveWC fill:#f0ad4e,color:#000
+

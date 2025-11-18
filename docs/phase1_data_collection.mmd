@@ -1,0 +1,34 @@
+flowchart TD
+    Start([Start Data Collection]) --> Stage1A[Stage 1A: Scrape Video Links]
+    
+    Stage1A --> Input1[Input: Keywords]
+    Input1 --> Script1[Run: scraper_link_video_tt.py]
+    Script1 --> Output1[Output: tiktok_links.txt]
+    
+    Output1 --> Stage1B[Stage 1B: Scrape Video Details & Comments]
+    
+    Stage1B --> Load[Load: tiktok_links.txt]
+    Load --> Loop{For Each Video Link}
+    
+    Loop --> OpenBrowser[Open Video in Firefox]
+    OpenBrowser --> UserInput[User Input: Comment Mode<br/>0=Normal, 1=Side]
+    
+    UserInput --> ExtractMeta[Extract Metadata<br/>- Video ID<br/>- Username<br/>- Caption<br/>- Likes<br/>- Hashtags]
+    
+    ExtractMeta --> DetectCount[Detect Total Comment Count]
+    DetectCount --> ScrollComments[Smart Scroll Comments<br/>- Smooth scroll 500px/800px<br/>- Wait for load<br/>- Stop if 10x no change]
+    
+    ScrollComments --> ExpandReplies[Expand Replies<br/>- Click 'Lihat X balasan'<br/>- Click 'Lihat X lainnya']
+    
+    ExpandReplies --> ExtractComments[Extract All Comments<br/>- Find nested span TUXText<br/>- Fallback methods<br/>- Avoid duplicates]
+    
+    ExtractComments --> AutoSave[Auto-Save to CSV]
+    AutoSave --> Loop
+    
+    Loop -->|All Videos Done| Output2[Output: scraped_data.csv]
+    Output2 --> End([Data Collection Complete])
+    
+    style Stage1A fill:#4a90e2,color:#fff
+    style Stage1B fill:#357abd,color:#fff
+    style AutoSave fill:#5cb85c,color:#fff
+    style Output2 fill:#f0ad4e,color:#000

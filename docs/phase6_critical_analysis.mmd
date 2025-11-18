@@ -1,0 +1,54 @@
+flowchart TD
+    Start([Start Critical Analysis]) --> Load[Load All Results]
+    
+    Load --> Analysis1[Analysis 1:<br/>Web3 Awareness]
+    Load --> Analysis2[Analysis 2:<br/>Opinion Polarization]
+    Load --> Analysis3[Analysis 3:<br/>Sentiment Triggers]
+    Load --> Analysis4[Analysis 4:<br/>Discourse Patterns]
+    Load --> Analysis5[Analysis 5:<br/>Bias & Limitations]
+    
+    Analysis1 --> A1_1[Frequency Index<br/>Mention of Web3 terms]
+    A1_1 --> A1_2[Understanding Level<br/>Surface/Basic/Deep]
+    A1_2 --> A1_3[Context Analysis<br/>Tech/Economy/Social/Skeptic]
+    A1_3 --> A1_4[Co-occurrence Network<br/>Associated words]
+    A1_4 --> Output1[Output: web3_awareness.csv]
+    
+    Analysis2 --> A2_1[Identify Controversial Topics]
+    A2_1 --> A2_2[Sentiment Distribution<br/>per Topic]
+    A2_2 --> A2_3[Detect Echo Chambers]
+    A2_3 --> Output2[Output: polarization_analysis.csv]
+    
+    Analysis3 --> A3_1[Event Correlation<br/>News/Market events]
+    A3_1 --> A3_2[Market Correlation<br/>Crypto/NFT prices]
+    A3_2 --> A3_3[Trend Connection<br/>Real-world events]
+    A3_3 --> Output3[Output: sentiment_triggers.csv]
+    
+    Analysis4 --> A4_1[Identify Influencers<br/>Opinion leaders]
+    A4_1 --> A4_2[Viral Patterns<br/>Spread analysis]
+    A4_2 --> A4_3[Detect Campaigns<br/>Organized activity]
+    A4_3 --> Output4[Output: discourse_patterns.csv]
+    
+    Analysis5 --> A5_1[Hashtag Selection Bias]
+    A5_1 --> A5_2[Rule-based Limitations]
+    A5_2 --> A5_3[Sample Representativeness]
+    A5_3 --> Output5[Output: limitations_report.txt]
+    
+    Output1 --> Synthesize
+    Output2 --> Synthesize
+    Output3 --> Synthesize
+    Output4 --> Synthesize
+    Output5 --> Synthesize
+    
+    Synthesize[Synthesize Findings] --> Report[Generate Final Report<br/>15-20 pages]
+    
+    Report --> Summary[Create Summary Report<br/>Key insights & recommendations]
+    Summary --> End([Critical Analysis Complete])
+    
+    style Analysis1 fill:#e74c3c,color:#fff
+    style Analysis2 fill:#e74c3c,color:#fff
+    style Analysis3 fill:#e74c3c,color:#fff
+    style Analysis4 fill:#e74c3c,color:#fff
+    style Analysis5 fill:#e74c3c,color:#fff
+    style Report fill:#f0ad4e,color:#000
+    style Summary fill:#f0ad4e,color:#000
+

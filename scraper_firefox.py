@@ -490,7 +490,7 @@ def scrape_with_firefox(input_file):
                 if len(all_data) > 0:
                     os.makedirs('output/data', exist_ok=True)
                     temp_df = pd.DataFrame(all_data)
-                    temp_df.to_csv('output/data/scraped_data.csv', index=False)
+                    temp_df.to_csv('output/data/scraped_data.csv', index=False, encoding='utf-8', quoting=1, escapechar='\\')
                     print(f'  💾 Saved {len(all_data)} rows to output/data/scraped_data.csv\n')
                 
                 # Human-like wait
@@ -535,7 +535,7 @@ if __name__ == "__main__":
     
     if df is not None and len(df) > 0:
         os.makedirs('output/data', exist_ok=True)
-        df.to_csv('output/data/scraped_data.csv', index=False)
+        df.to_csv('output/data/scraped_data.csv', index=False, encoding='utf-8', quoting=1, escapechar='\\')
         print(f'\n✓ SUCCESS!')
         print(f'✓ Total rows: {len(df)}')
         print(f'✓ Saved to: output/data/scraped_data.csv')

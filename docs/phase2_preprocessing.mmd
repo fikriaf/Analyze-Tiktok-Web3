@@ -1,0 +1,34 @@
+flowchart TD
+    Start([Start Preprocessing]) --> Load[Load: scraped_data.csv]
+    
+    Load --> Step1[Step 1: Case Folding<br/>Convert to lowercase]
+    Step1 --> Example1["Example:<br/>'BLOCKCHAIN' → 'blockchain'"]
+    
+    Example1 --> Step2[Step 2: Tokenization<br/>Split by whitespace]
+    Step2 --> Example2["Example:<br/>'Web3 sangat menarik'<br/>→ ['web3', 'sangat', 'menarik']"]
+    
+    Example2 --> Step3[Step 3: Stopword Removal<br/>Remove common words]
+    Step3 --> Example3["Remove: 'yang', 'dan', 'di',<br/>'ke', 'dari', 'untuk'"]
+    
+    Example3 --> Step4[Step 4: Normalization<br/>Convert slang to formal]
+    Step4 --> Example4["Examples:<br/>'gak' → 'tidak'<br/>'banget' → 'sangat'<br/>'keren' → 'bagus'<br/>'udah' → 'sudah'"]
+    
+    Example4 --> Step5[Step 5: Filtering<br/>Remove noise]
+    Step5 --> Filter1[Remove Emoji & Emoticons]
+    Filter1 --> Filter2[Remove URLs & Links]
+    Filter2 --> Filter3[Remove Mentions @username]
+    Filter3 --> Filter4[Remove Hashtags from text]
+    Filter4 --> Filter5[Remove Extra Punctuation]
+    
+    Filter5 --> Validate{Validate<br/>Cleaned Text}
+    Validate -->|Invalid| Step1
+    Validate -->|Valid| Output[Output: preprocessed_data.csv]
+    
+    Output --> End([Preprocessing Complete])
+    
+    style Step1 fill:#f39c12,color:#fff
+    style Step2 fill:#f39c12,color:#fff
+    style Step3 fill:#f39c12,color:#fff
+    style Step4 fill:#f39c12,color:#fff
+    style Step5 fill:#f39c12,color:#fff
+    style Output fill:#f0ad4e,color:#000

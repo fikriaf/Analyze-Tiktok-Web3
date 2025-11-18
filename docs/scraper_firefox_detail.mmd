@@ -1,0 +1,71 @@
+flowchart TD
+    Start([Start Scraper]) --> Setup[Setup Firefox<br/>- Anti-detection preferences<br/>- Auto-download geckodriver<br/>- Maximize window]
+    
+    Setup --> LoadExisting{Existing CSV<br/>Found?}
+    LoadExisting -->|Yes| LoadData[Load Existing Data<br/>Continue scraping]
+    LoadExisting -->|No| InitData[Initialize Empty Data]
+    
+    LoadData --> ReadLinks
+    InitData --> ReadLinks
+    
+    ReadLinks[Read: tiktok_links.txt] --> Loop{For Each Link}
+    
+    Loop --> Navigate[Navigate to Video URL<br/>Wait 7 seconds]
+    
+    Navigate --> AskMode[Ask User:<br/>Comment Mode?<br/>0=Normal, 1=Side]
+    
+    AskMode --> ValidateMode{Valid Input?}
+    ValidateMode -->|No| AskMode
+    ValidateMode -->|Yes| SetMode[Set comment_mode]
+    
+    SetMode --> ExtractBasic[Extract Basic Info<br/>- Video ID<br/>- Username<br/>- Caption<br/>- Likes<br/>- Hashtags]
+    
+    ExtractBasic --> CheckMode{Mode?}
+    
+    CheckMode -->|Side Comment| ClickIcon[Click Comment Icon<br/>Open sidebar<br/>Wait 5 seconds]
+    CheckMode -->|Normal| ScrollInit[Initial Scroll<br/>3x 800px<br/>Load comment section]
+    
+    ClickIcon --> DetectCount
+    ScrollInit --> DetectCount
+    
+    DetectCount[Detect Total Comment Count<br/>- Side: span TUXText<br/>- Normal: p PCommentTitle]
+    
+    DetectCount --> ScrollStrategy{Scroll Strategy}
+    
+    ScrollStrategy -->|Side Comment| ScrollSidebar[Scroll Sidebar<br/>- 500px per step<br/>- 3 sec delay<br/>- Max 200 scrolls]
+    ScrollStrategy -->|Normal Comment| ScrollMain[Scroll Main Page<br/>- 800px per step<br/>- 4 sec delay<br/>- Max 200 scrolls]
+    
+    ScrollSidebar --> CountComments1[Count Current Comments<br/>level-1 + level-2]
+    ScrollMain --> CountComments1
+    
+    CountComments1 --> CheckStop{Stop Condition?}
+    
+    CheckStop -->|10x no change| StopScroll[Stop: Reached Bottom]
+    CheckStop -->|95% of total| StopScroll
+    CheckStop -->|Max scroll| StopScroll
+    CheckStop -->|Continue| ScrollStrategy
+    
+    StopScroll --> ExpandReplies[Expand Replies<br/>Find & Click:<br/>- 'Lihat X balasan'<br/>- 'Lihat X lainnya'<br/>Wait 2 sec per click]
+    
+    ExpandReplies --> ExtractComments[Extract All Comments<br/>1. Find nested span TUXText<br/>2. Fallback: direct text<br/>3. Fallback: textContent JS]
+    
+    ExtractComments --> Deduplicate[Remove Duplicates<br/>Using set]
+    
+    Deduplicate --> SaveVideo[Auto-Save Video Data<br/>Append to CSV]
+    
+    SaveVideo --> PrintStats[Print Stats:<br/>- Comments extracted<br/>- Total rows saved]
+    
+    PrintStats --> Wait[Human-like Wait<br/>7-13 seconds]
+    
+    Wait --> Loop
+    
+    Loop -->|All Done| CloseBrowser[Close Firefox]
+    CloseBrowser --> FinalSave[Final Save:<br/>scraped_data.csv]
+    
+    FinalSave --> End([Scraping Complete])
+    
+    style ClickIcon fill:#3498db,color:#fff
+    style ScrollSidebar fill:#3498db,color:#fff
+    style ScrollMain fill:#f39c12,color:#fff
+    style SaveVideo fill:#5cb85c,color:#fff
+    style FinalSave fill:#f0ad4e,color:#000

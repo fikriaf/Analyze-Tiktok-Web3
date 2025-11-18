@@ -18,9 +18,21 @@ Proyek ini mengimplementasikan analisis sentimen berbasis rule-based (lexicon-ba
 
 ### Tahapan Penelitian:
 
-1. **Pengumpulan Data**
-   - Scraping TikTok berdasarkan hashtag target
-   - Target: #AIethics, #blockchain, #sustainability, #web3, #digitalfreedom, #cryptocurrency, #NFT, #metaverse, #privacy
+1. **Pengumpulan Data (Metode Dua Tahap)**
+   
+   **Tahap 1A: Scraping Link Video** (`scraper_link_video_tt.py`)
+   - Scraping link video TikTok berdasarkan hashtag/keyword
+   - Output: File `tiktok_links.txt`
+   
+   **Tahap 1B: Scraping Detail & Komentar** (`scraper_firefox.py`)
+   - Input: File `tiktok_links.txt`
+   - Menggunakan Selenium + Firefox untuk browser automation
+   - User control: Pilih mode comment per video (normal/side)
+   - Smart scrolling: Deteksi total comment dan scroll sampai mendekati target
+   - Auto-save: Data tersimpan setiap video selesai
+   - Extract: Caption, likes, hashtags, dan semua comment (termasuk replies)
+   
+   **Target Hashtag**: #AIethics, #blockchain, #sustainability, #web3, #digitalfreedom, #cryptocurrency, #NFT, #metaverse, #privacy
 
 2. **Pra-Pemrosesan Data**
    - Case folding
@@ -56,19 +68,53 @@ Proyek ini mengimplementasikan analisis sentimen berbasis rule-based (lexicon-ba
 ### Prerequisites
 
 ```bash
-pip install pandas numpy matplotlib seaborn wordcloud
+pip install -r requirements.txt
 ```
 
-Untuk scraping (pilih salah satu):
+Atau install manual:
 ```bash
-# Opsi 1: TikTokApi (unofficial)
-pip install TikTokApi
-playwright install
-
-# Opsi 2: Gunakan RapidAPI atau Apify (perlu API key)
+pip install pandas numpy matplotlib seaborn wordcloud selenium webdriver-manager
 ```
 
-### Menjalankan Notebook
+### Scraping Data TikTok (Metode Dua Tahap)
+
+**Tahap 1: Scraping Link Video**
+
+```bash
+python scraper_link_video_tt.py
+```
+
+- Input hashtag atau keyword yang ingin di-scrape
+- Script akan mengumpulkan link video TikTok
+- Output: `tiktok_links.txt` berisi daftar URL video
+
+**Tahap 2: Scraping Detail Video & Komentar**
+
+```bash
+python scraper_firefox.py
+```
+
+- Script akan membaca file `tiktok_links.txt`
+- Firefox browser akan terbuka otomatis
+- Untuk setiap video:
+  - Video akan dibuka di browser
+  - User diminta input mode comment (0=Normal, 1=Side Comment)
+  - Script akan scroll dan load semua comment
+  - Klik button "Lihat X balasan" untuk expand replies
+  - Extract semua comment text
+  - Auto-save setiap video selesai
+- Output: `output/data/scraped_data.csv`
+
+**Fitur Scraper Firefox:**
+- ✅ Auto-detect jumlah total comment
+- ✅ Smart scroll sampai mendekati total comment
+- ✅ Stop otomatis jika 10x scroll tidak ada penambahan comment
+- ✅ Support mode normal dan side comment
+- ✅ Auto-save setiap video (data tidak hilang jika crash)
+- ✅ Resume scraping (load data existing jika file sudah ada)
+- ✅ Extract nested comment text dengan multiple fallback methods
+
+### Menjalankan Analisis
 
 1. Buka Jupyter Notebook:
 ```bash
@@ -77,7 +123,7 @@ jupyter notebook tiktok_sentiment_analysis.ipynb
 
 2. Jalankan sel secara berurutan dari atas ke bawah
 
-3. **PENTING:** Modifikasi fungsi `scrape_tiktok_data()` dengan implementasi scraping yang sesuai dengan API yang Anda pilih
+3. Hasil analisis akan tersimpan otomatis di folder `output/`
 
 ### Struktur Output
 
@@ -135,33 +181,52 @@ output/
 
 ## 📝 Catatan Implementasi
 
-### Untuk Scraping Data Real:
+### Scraping TikTok dengan Firefox
 
-**Opsi 1: TikTokApi (Unofficial)**
+Proyek ini menggunakan **Selenium + Firefox** untuk scraping karena:
+- ✅ Lebih susah dideteksi dibanding Chrome
+- ✅ Tidak perlu API key atau subscription
+- ✅ Full control terhadap proses scraping
+- ✅ Bisa handle berbagai layout TikTok (normal/side comment)
+- ✅ Auto-download geckodriver (tidak perlu install manual)
+
+### Konfigurasi Scraper
+
+**File: `scraper_firefox.py`**
+
 ```python
-from TikTokApi import TikTokApi
+# Input file
+input_file = 'tiktok_links.txt'
 
-api = TikTokApi()
-hashtag = api.hashtag(name='web3')
-videos = hashtag.videos(count=100)
+# Output file (auto-save setiap video)
+output_file = 'output/data/scraped_data.csv'
+
+# Scroll settings
+scroll_delay = 3  # detik per scroll (sidebar)
+scroll_delay_main = 4  # detik per scroll (main page)
+max_scroll = 200  # safety limit
+no_change_threshold = 10  # stop jika 10x scroll tidak ada perubahan
 ```
 
-**Opsi 2: RapidAPI**
-- Daftar di https://rapidapi.com
-- Subscribe ke TikTok Scraper API
-- Gunakan API key untuk request
+### Tips Scraping
 
-**Opsi 3: Apify**
-- Daftar di https://apify.com
-- Gunakan TikTok Scraper actor
-- Export hasil ke CSV/JSON
+1. **Mode Comment**:
+   - Mode 0 (Normal): Comment di bawah video
+   - Mode 1 (Side Comment): Comment di sidebar kanan
 
-### Modifikasi yang Diperlukan:
+2. **Scroll Strategy**:
+   - Sidebar: Smooth scroll 500px per step
+   - Main page: Smooth scroll 800px per step
+   - Auto-detect total comment dan scroll sampai 95% atau mentok
 
-1. Ganti fungsi `scrape_tiktok_data()` dengan implementasi API yang dipilih
-2. Sesuaikan struktur data dengan response API
-3. Tambahkan error handling dan rate limiting
-4. Implementasikan data privacy (enkripsi username)
+3. **Expand Replies**:
+   - Auto-klik button "Lihat X balasan"
+   - Auto-klik button "Lihat X lainnya"
+   - Support bahasa Indonesia dan Inggris
+
+4. **Data Privacy**:
+   - Username bisa di-enkripsi jika diperlukan
+   - Tidak menyimpan informasi pribadi sensitif
 
 ## 📚 Referensi
 
