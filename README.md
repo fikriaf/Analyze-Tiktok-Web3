@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 # 📊 TikTok Sentiment Analysis
 ### Research Workflow & Documentation
